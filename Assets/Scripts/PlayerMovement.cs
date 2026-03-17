@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform t;
     private bool isFacingRight = false;
     private float horizontal;
+    private int quantityJumps = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +39,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
-        if(jump != 0 && !isGround && Input.GetButtonDown("Jump"))
+        if(jump != 0 && !isGround && Input.GetButtonDown("Jump") && quantityJumps == 1)
         {
             animator.SetTrigger("doubleJump");
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            quantityJumps = 0;
         }
         Flip();
     }
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         {
             isGround = true;
         }
+
+        quantityJumps = 1;
 
         if (collision.gameObject.CompareTag("Box"))
         {
