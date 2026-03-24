@@ -53,9 +53,12 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGround = true;
+            quantityJumps = 1;
+
         }
 
-        quantityJumps = 1;
+       
+
 
         if (collision.gameObject.CompareTag("Box"))
         {
