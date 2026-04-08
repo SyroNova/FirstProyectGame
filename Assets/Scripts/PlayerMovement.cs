@@ -6,8 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
-    public float jumpSpeed = 1f;
+    public float speed = 3f;
+    public float jumpSpeed = 3f;
     private Rigidbody2D rb;
     public bool isGround;
     private Animator animator;
@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = false;
     private float horizontal;
     private int quantityJumps = 1;
+    public AudioClip explosion;
+    public GameObject audioManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,11 +59,9 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-       
-
-
         if (collision.gameObject.CompareTag("Box"))
         {
+            audioManager.GetComponent<AudioManager>().PlaySound(explosion);
             Destroy(collision.gameObject);
         }
     }
